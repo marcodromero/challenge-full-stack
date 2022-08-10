@@ -1,28 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Abm from './pages/Abm.js';
+import Home from './pages/Home.js';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <form action ="../../test" method="POST"
-          className="form">
-            <button type="submit"> Connected?</button>
-        </form>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Link to="/">Home</Link>
+        <Link to="/abm">ABM</Link>
+      </div>
+
+      <Routes>
+          <Route path="/" element= {<Home />}/>
+          <Route path="/Abm" element= {<Abm />}/>      
+      </Routes>
+
+    </Router>
   );
 }
 
