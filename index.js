@@ -79,7 +79,7 @@ app.delete('/operations/:id',(req, res)=>{
 })
 
 app.get('/balance',(req, res)=>{
-    const query = 'SELECT * FROM balance ORDER BY date DESC';
+    const query = 'SELECT * FROM balance ORDER BY date DESC LIMIT 10';
     connection.query(query,(error, results) =>{
         if(error) throw error;
         if (results.length > 0){
