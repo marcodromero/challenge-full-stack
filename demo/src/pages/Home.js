@@ -1,4 +1,6 @@
 import React from 'react';
+import Table from '../components/Table.js';
+import Display from '../components/Display.js';
 
 function Home(){
     const [lastBalance, setLastBalance] = React.useState([{}]);
@@ -38,14 +40,16 @@ function Home(){
   
     return(
         <div className="Home">
-            <h1>Balance actual</h1>
-                <p>{lastBalance[0].amount}</p>
-            <h1>Ultimos balances registrados</h1>
-            {
-                balance.map(item => (
-                    <p key = {item.id_balance}> {item.amount} {item.date}</p>
-                ))
-            }
+            <Display
+                title = 'Balance actual'
+                value = {lastBalance}
+            />
+
+            <Table
+                title = 'Ultimos balances registrados'
+                data = {balance}
+                isOperationsTable = {false}
+            />
         </div>
     );
 }

@@ -23,7 +23,7 @@ connection.connect(error =>{
 });
 
 app.get('/operations',(req, res)=>{
-    const query = 'SELECT id_operation, concept, amount, DATE_FORMAT(date, "%d/%m/%Y")as date FROM operations ORDER BY date DESC';
+    const query = 'SELECT id_operation, type, concept, amount, DATE_FORMAT(date, "%d/%m/%Y")as date FROM operations ORDER BY date DESC';
     connection.query(query,(error, results) =>{
         if(error) throw error;
         if (results.length > 0){

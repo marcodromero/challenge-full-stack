@@ -1,8 +1,10 @@
 import React from 'react';
 import Form from '../components/Form.js';
+import Table from '../components/Table.js';
 
 function Abm(){
     const [operations, setOperations] = React.useState([{}]);
+    const [balance, setBalance] = React.useState([{}]);
 
     const getOperations = ()=>{
         const api = new XMLHttpRequest();
@@ -21,8 +23,16 @@ function Abm(){
        alert("Funciona");
     }
 
+    const updateOperation = () => {
+        alert("Funciona");
+     }
+
+     const deleteOperation = () => {
+        alert("Funciona");
+     }
+
     React.useEffect(()=>{
-        getOperations();
+       getOperations();
     }, []);
 
     return(
@@ -37,12 +47,13 @@ function Abm(){
                 date = ''
             />
 
-            <h1>Operaciones registradas</h1>
-            {
-                operations.map(item => (
-                    <p key = {item.id_operation}> {item.type} {item.concept} {item.amount} {item.date}</p>
-                ))
-            }
+            <Table
+                title = 'Operaciones registradas'
+                data = {operations}
+                isOperationsTable = {true}
+            />
+
+            
         </div>
     );
 }
