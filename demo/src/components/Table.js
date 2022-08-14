@@ -7,24 +7,27 @@ function Table({title, data, isOperationsTable}){
         <div>
             <h1>{title}</h1>
             <table border ='1'>
-                <tr>
-                    {isOperationsTable ? (<><th>Tipo</th> <th>Concepto</th></>) : ('') }
-                
-                    <th>Monto</th>
-                    <th>Fecha</th>
-                </tr>
+                <thead>
+                    <tr>
+                        {isOperationsTable ? (<><th>Tipo</th><th>Concepto</th></>) : ('') }
+                        
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
             {
                 data.map(item => (
-                    <tr key = {item.id_operation}>
+                    <tr key = {item}>
                         {isOperationsTable ? (<>
                          <td>{item.type}</td> 
                          <td>{item.concept}</td>
                          </>) : ('') }
                          <td>{item.amount}</td>
                          <td>{item.date}</td>
-                    </tr>
-                ))
+                    </tr>))
             }
+                </tbody>
             </table>
         </div>
 

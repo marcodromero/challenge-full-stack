@@ -35,12 +35,12 @@ app.get('/operations',(req, res)=>{
 })
 
 app.post('/operations',(req, res)=>{
-   const {type, concept, amount} = req.body;
-   const query = `INSERT INTO operations (type, concept, amount) VALUES("${type}", "${concept}", ${amount})`;
-
+   const {type, concept, amount, date} = req.body;
+   const query = `INSERT INTO operations (type, concept, amount, date) VALUES("${type}", "${concept}", ${amount}, "${date}" )`;
+  
    connection.query(query,(error) =>{
     if(error) throw error;
-    res.send('Operation created'); 
+    res.send('Operation created');    
    })
 })
 

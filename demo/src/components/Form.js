@@ -4,14 +4,14 @@ function Form({request, typeIsEnabled, title, concept , date, amount}){
     return(
         <div>
             <h1>{title}</h1>
-            <form method='POST'>
-                    <label for ="concept">Concepto</label>
-                    <input type ="text" id="concept" value = {concept}/>
-                    <label for ="amount">Monto</label>
-                    <input type ="number" step="0.01" id="amount" value = {amount}/>
-                    <label for ="date">Fecha</label>
-                    <input type ="date" id="date" value={date}/>
-                    <label for ="type">Tipo</label>
+            <form>
+                    <label htmlFor ="concept">Concepto</label>
+                    <input type ="text" id="concept" defaultValue = {concept}/>
+                    <label htmlFor ="amount">Monto</label>
+                    <input type ="number" step="0.01" id="amount" defaultValue = {amount}/>
+                    <label htmlFor ="date">Fecha</label>
+                    <input type ="date" id="date" defaultValue={date}/>
+                    <label htmlFor ="type">Tipo</label>
                     {typeIsEnabled ? 
                             (<select name="type" id="type">
                                 <option value="ingreso">Ingreso</option>
@@ -24,7 +24,7 @@ function Form({request, typeIsEnabled, title, concept , date, amount}){
                         
                     }
                     
-                    <button onClick={request}> Cargar operación </button>
+                    <button type= 'button' onClick={request}> Cargar operación </button>
             </form>
         </div>
     );

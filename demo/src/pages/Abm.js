@@ -20,7 +20,31 @@ function Abm(){
     }
 
     const sendOperation = () => {
-       alert("Funciona");
+        const type = document.getElementById('type').value;
+        const concept = document.getElementById('concept').value;
+        const amount = document.getElementById('amount').value;
+        const date = document.getElementById('date').value;
+        
+        const api = new XMLHttpRequest();
+        api.open('POST', 'http://localhost:8080/operations', true);
+        api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+        api.send(JSON.stringify(
+            {
+                "type" : `${type}`,
+                "concept": `${concept}`,
+                "amount" : `${amount}`,
+                "date" : `${date}`
+            }
+        ));
+
+        api.onreadystatechange = () => {
+            if(api.status == 200 && api.readyState == 4){
+                setOperations(JSON.parse(api.responseText));
+             }
+
+        }
+
+        return false;
     }
 
     const updateOperation = () => {
