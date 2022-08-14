@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from '../components/Form.js';
 import Table from '../components/Table.js';
+import ModalForm from '../components/ModalForm.js';
 
 function Abm(){
     const [operations, setOperations] = React.useState([{}]);
@@ -61,22 +62,28 @@ function Abm(){
 
     return(
         <div className="Abm">
-       
-            <Form
-                title = 'Formulario de ingreso de operación'
-                request = {sendOperation}
-                typeIsEnabled = {true}
-                concept = ''
-                amount = {0}
-                date = ''
-            />
+        
+          
+                <Form
+                    title = 'Formulario de ingreso de operación'
+                    request = {sendOperation}
+                    typeIsEnabled = {true}
+                    concept = ''
+                    amount = {0}
+                    date = ''
+                />
 
-            <Table
-                title = 'Operaciones registradas'
-                data = {operations}
-                isOperationsTable = {true}
-            />
+                <Table
+                    title = 'Operaciones registradas'
+                    data = {operations}
+                    isOperationsTable = {true}
+                />
 
+                <ModalForm
+                    
+                />
+
+                
             
         </div>
     );

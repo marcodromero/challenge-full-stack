@@ -6,7 +6,7 @@ function Table({title, data, isOperationsTable}){
     return(
         <div>
             <h1>{title}</h1>
-            <table border ='1'>
+            <table>
                 <thead>
                     <tr>
                         {isOperationsTable ? (<><th>Tipo</th><th>Concepto</th></>) : ('') }
@@ -25,6 +25,10 @@ function Table({title, data, isOperationsTable}){
                          </>) : ('') }
                          <td>{item.amount}</td>
                          <td>{item.date}</td>
+                         <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Modificar
+                            </button>
+                        </td>
                     </tr>))
             }
                 </tbody>
