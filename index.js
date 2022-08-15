@@ -57,9 +57,9 @@ app.patch('/operations',(req, res)=>{
    })
 })
 
-app.delete('/operations/:id',(req, res)=>{
-    const {id} = req.params;
-    const query = `DELETE FROM operations WHERE id_operation = ${id}`;
+app.delete('/operations',(req, res)=>{
+    const {id_operation} = req.body;
+    const query = `DELETE FROM operations WHERE id_operation = ${id_operation}`;
     connection.query(query,(error, results) =>{
         if(error) throw error;
         res.send('Operation deleted');

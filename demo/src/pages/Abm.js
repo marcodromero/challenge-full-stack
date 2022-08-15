@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../components/Form.js';
 import Table from '../components/Table.js';
 import ModalForm from '../components/ModalForm.js';
+import ModalValidation from '../components/ModalValidation.js';
 
 function Abm(){
     const [operations, setOperations] = React.useState([{}]);
@@ -75,9 +76,28 @@ function Abm(){
         return false;
       }
 
-     const deleteOperation = () => {
-        alert("Funciona");
-     }
+      const deleteOperation = () => {
+        const id_operation = document.getElementById('modalValidationId_Operation').value;
+        
+        const api = new XMLHttpRequest();
+        api.open('DELETE', 'http://localhost:8080/operations', true);
+        api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+        api.send(JSON.stringify(
+            {
+                "id_operation": `${id_operation}`
+            }
+        ));
+
+        api.onreadystatechange = () => {
+            if(api.status == 200 && api.readyState == 4){
+                getOperations();
+             }
+
+        }
+
+        return false;
+      }
+
 
     React.useEffect(()=>{
        getOperations();
@@ -102,6 +122,9 @@ function Abm(){
 
                 <ModalForm
                     data = {updateOperation}
+                />
+                <ModalValidation
+                    request = {deleteOperation}
                 />
 
                 

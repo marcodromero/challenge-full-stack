@@ -26,7 +26,7 @@ function Table({title, data, isOperationsTable}){
                          <td>{item.amount}</td>
                          <td>{item.formattedDate}</td>
                          {isOperationsTable ? (<>
-                         <td><button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                         <td><button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropModalForm"
                           onClick = {()=>{
                             document.getElementById("modalAmount").value = item.amount;
                             document.getElementById("modalConcept").value = item.concept;
@@ -34,6 +34,17 @@ function Table({title, data, isOperationsTable}){
                             document.getElementById("modalId_operation").value = item.id_operation;
                             }}>
                                 Modificar
+                            </button>
+                            <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropModalValidation"
+                          onClick = {()=>{
+                                document.getElementById("modalValidationId_Operation").value = item.id_operation;
+                               
+                                document.getElementById("deleteType").textContent= `"${item.type}"`;
+                                document.getElementById("deleteConcept").textContent= `"${item.concept}"`;
+                                document.getElementById("deleteAmount").textContent= `"${item.amount}"`;
+                                document.getElementById("deleteDate").textContent= `"${item.date}"`;
+                            }}>
+                                Eliminar
                             </button>
                         </td></>) : ('')}
                     </tr>))
