@@ -8,6 +8,7 @@ const PORT = process.eventNames.PORT || 8080;
 app.use(express.json());
 app.use(cors());
 
+
 app.listen(PORT , console.log(`Server started on port ${PORT}`));
 
 const connection = mysql.createConnection({
@@ -22,8 +23,10 @@ connection.connect(error =>{
     console.log('Database server running');
 });
 
+app.options('*', cors());
+
 app.get('/operations',(req, res)=>{
-    const query = 'SELECT id_operation, type, concept, amount, DATE_FORMAT(date, "%d/%m/%Y")as date FROM operations ORDER BY date DESC';
+    const query = 'SELECT id_operation, type, concept, amount, DATE_FORMAT(date, "%Y-%m-%d")as date, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM operations ORDER BY date DESC';
     connection.query(query,(error, results) =>{
         if(error) throw error;
         if (results.length > 0){
@@ -44,10 +47,9 @@ app.post('/operations',(req, res)=>{
    })
 })
 
-app.patch('/operations/:id',(req, res)=>{
-    const {id} = req.params;
-    const {concept, amount} = req.body;
-    const query = `UPDATE operations SET concept = "${concept}", amount= ${amount} WHERE id_operation = ${id}`;
+app.patch('/operations',(req, res)=>{
+    const {id_operation, concept, amount, date} = req.body;
+    const query = `UPDATE operations SET concept = "${concept}", amount= ${amount}, date = "${date}" WHERE id_operation = ${id_operation}`;
 
     connection.query(query,(error) =>{
     if(error) throw error;
@@ -65,19 +67,19 @@ app.delete('/operations/:id',(req, res)=>{
 })
 
 app.get('/balance',(req, res)=>{
-    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as date FROM balance ORDER BY date DESC LIMIT 10';
+    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY date DESC LIMIT 10';
     connection.query(query,(error, results) =>{
         if(error) throw error;
         if (results.length > 0){
             res.json(results);
         }else{
-            res.send('Not result');
+            res.send('Not result'); 
         }
     })
 })
 
 app.get('/last-balance',(req, res)=>{
-    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as date FROM balance ORDER BY date DESC LIMIT 1';
+    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY date DESC LIMIT 1';
     connection.query(query,(error, results) =>{
         if(error) throw error;
         if (results.length > 0){

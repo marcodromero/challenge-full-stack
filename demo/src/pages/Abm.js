@@ -5,7 +5,6 @@ import ModalForm from '../components/ModalForm.js';
 
 function Abm(){
     const [operations, setOperations] = React.useState([{}]);
-    const [balance, setBalance] = React.useState([{}]);
 
     const getOperations = ()=>{
         const api = new XMLHttpRequest();
@@ -40,7 +39,7 @@ function Abm(){
 
         api.onreadystatechange = () => {
             if(api.status == 200 && api.readyState == 4){
-                setOperations(JSON.parse(api.responseText));
+                getOperations();
              }
 
         }
@@ -49,8 +48,32 @@ function Abm(){
     }
 
     const updateOperation = () => {
-        alert("Funciona");
-     }
+        const concept = document.getElementById('modalConcept').value;
+        const amount = document.getElementById('modalAmount').value;
+        const date = document.getElementById('modalDate').value;
+        const id_operation = document.getElementById('modalId_operation').value;
+        
+        const api = new XMLHttpRequest();
+        api.open('PATCH', 'http://localhost:8080/operations', true);
+        api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+        api.send(JSON.stringify(
+            {
+                "id_operation": `${id_operation}`,
+                "concept": `${concept}`,
+                "amount" : `${amount}`,
+                "date" : `${date}`
+            }
+        ));
+
+        api.onreadystatechange = () => {
+            if(api.status == 200 && api.readyState == 4){
+                getOperations();
+             }
+
+        }
+
+        return false;
+      }
 
      const deleteOperation = () => {
         alert("Funciona");
@@ -67,10 +90,8 @@ function Abm(){
                 <Form
                     title = 'Formulario de ingreso de operación'
                     request = {sendOperation}
-                    typeIsEnabled = {true}
-                    concept = ''
-                    amount = {0}
-                    date = ''
+                    isModal = {false}
+                    
                 />
 
                 <Table
@@ -80,7 +101,7 @@ function Abm(){
                 />
 
                 <ModalForm
-                    
+                    data = {updateOperation}
                 />
 
                 
