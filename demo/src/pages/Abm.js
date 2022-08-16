@@ -42,8 +42,9 @@ function Abm(){
             if(api.status == 200 && api.readyState == 4){
                 getOperations();
              }
-
+             console.log(api.responseText);
         }
+        
 
         return false;
     }

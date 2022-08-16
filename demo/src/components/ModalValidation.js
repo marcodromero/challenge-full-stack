@@ -13,16 +13,20 @@ function ModalValidation({request}){
                         <p>Confirme que desea eliminar la operación:</p>
                         <table>
                             <thead>
-                                <th>Tipo</th>
-                                <th>Concepto</th>
-                                <th>Monto</th>
-                                <th>Fecha</th>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                    <th>Fecha</th>
+                                </tr>
                             </thead>
                             <tbody>
-                                <td id="deleteType"></td>
-                                <td id="deleteConcept"></td>
-                                <td id="deleteAmount"></td>
-                                <td id="deleteDate"></td>
+                                <tr>
+                                    <td id="deleteType"></td>
+                                    <td id="deleteConcept"></td>
+                                    <td id="deleteAmount"></td>
+                                    <td id="deleteDate"></td>
+                                </tr>
                             </tbody>
                         </table>
                         <input type= "hidden" id="modalValidationId_Operation" />
