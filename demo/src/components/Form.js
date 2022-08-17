@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Form({request, isModal, title}){
+function Form({request, isModal}){
     return(
         <div>
-            <h1>{title}</h1>
-            <form>                   
+            
+            <form className='d-flex flex-column'>                   
                     {isModal ? 
                             (
                             <>
@@ -37,7 +37,7 @@ function Form({request, isModal, title}){
                         
                     }
                     
-                    <input type='submit' onSubmit={request} value="Enviar"/>
+                    <button type='submit' onClick={request} className="btn btn-primary" data-bs-dismiss="modal">Enviar</button>
             </form>
         </div>
     );

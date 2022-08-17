@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from '../components/Table.js';
 import Display from '../components/Display.js';
+import Navbar from '../components/Navbar.js';
 
 function Home(){
     const [lastBalance, setLastBalance] = React.useState([{}]);
@@ -40,15 +41,19 @@ function Home(){
   
     return(
         <div className="Home">
+            <Navbar />
             <Display
                 title = 'Balance actual'
                 value = {lastBalance}
+                idTarget = ''
+                isOperations = {false}
             />
 
             <Table
-                title = 'Ultimos balances registrados'
+                title = 'Balances registrados'
                 data = {balance}
                 isOperationsTable = {false}
+                idTarget = ''
             />
         </div>
     );

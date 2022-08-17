@@ -3,6 +3,8 @@ import Form from '../components/Form.js';
 import Table from '../components/Table.js';
 import ModalForm from '../components/ModalForm.js';
 import ModalValidation from '../components/ModalValidation.js';
+import Navbar from '../components/Navbar.js';
+import Display from '../components/Display.js';
 
 function Abm(){
     const [operations, setOperations] = React.useState([{}]);
@@ -39,7 +41,7 @@ function Abm(){
         ));
 
         api.onreadystatechange = () => {
-            if(api.status == 200 && api.readyState == 4){
+            if(api.status == 201 && api.readyState == 4){
                 getOperations();
              }
              console.log(api.responseText);
@@ -68,7 +70,7 @@ function Abm(){
         ));
 
         api.onreadystatechange = () => {
-            if(api.status == 200 && api.readyState == 4){
+            if(api.status == 204 && api.readyState == 4){
                 getOperations();
              }
 
@@ -90,7 +92,7 @@ function Abm(){
         ));
 
         api.onreadystatechange = () => {
-            if(api.status == 200 && api.readyState == 4){
+            if(api.status == 204 && api.readyState == 4){
                 getOperations();
              }
 
@@ -106,24 +108,34 @@ function Abm(){
 
     return(
         <div className="Abm">
-        
+                <Navbar />
           
-                <Form
-                    title = 'Formulario de ingreso de operación'
-                    request = {sendOperation}
-                    isModal = {false}
-                    
+                <Display
+                title = 'Nueva operación'
+                value = {[0]}
+                idTarget = '#staticBackdropModalFormSend'
+                isOperations = {true}
                 />
 
                 <Table
                     title = 'Operaciones registradas'
                     data = {operations}
                     isOperationsTable = {true}
+                    idTarget = '#staticBackdropModalFormUpdate'
                 />
 
                 <ModalForm
-                    data = {updateOperation}
+                    request = {sendOperation}
+                    title = 'Registrar operación'
+                    idModal = 'staticBackdropModalFormSend'
                 />
+
+                <ModalForm
+                    request = {updateOperation}
+                    title = 'Modificar operación'
+                    idModal = 'staticBackdropModalFormUpdate'
+                />
+
                 <ModalValidation
                     request = {deleteOperation}
                 />

@@ -25,7 +25,7 @@ connection.connect(error =>{
 app.options('*', cors());
 
 app.get('/operations',(req, res)=>{
-    const query = 'SELECT id_operation, type, concept, amount, DATE_FORMAT(date, "%Y-%m-%d")as date, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM operations ORDER BY date DESC';
+    const query = 'SELECT id_operation, type, concept, amount, DATE_FORMAT(date, "%Y-%m-%d")as date, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM operations ORDER BY date DESC, id_operation DESC';
     connection.query(query,(error, results) =>{
         if(error){
             console.log(error.sqlMessage);
@@ -83,7 +83,7 @@ app.delete('/operations',(req, res)=>{
 })
 
 app.get('/balance',(req, res)=>{
-    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY date DESC LIMIT 10';
+    const query = 'SELECT amount, date, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY id_balance DESC LIMIT 10';
     connection.query(query,(error, results) =>{
         if(error){
             console.log(error.sqlMessage);
@@ -99,7 +99,7 @@ app.get('/balance',(req, res)=>{
 })
 
 app.get('/last-balance',(req, res)=>{
-    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY date DESC LIMIT 1';
+    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY id_balance DESC LIMIT 1';
     connection.query(query,(error, results) =>{
         if(error){
             console.log(error.sqlMessage);

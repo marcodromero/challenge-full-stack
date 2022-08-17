@@ -11,11 +11,6 @@ import {
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Link to="/">Home</Link>
-        <Link to="/abm">ABM</Link>
-      </div>
-
       <Routes>
           <Route path="/" element= {<Home />}/>
           <Route path="/Abm" element= {<Abm />}/>      
