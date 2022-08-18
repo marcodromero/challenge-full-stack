@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Table({title, data, isOperationsTable, idTarget}){
+function Table({title, data, isOperationsTable, idButtonTarget}){
  
 
     return(
@@ -30,12 +30,12 @@ function Table({title, data, isOperationsTable, idTarget}){
                             <td>{item.amount}</td>
                             <td>{item.formattedDate}</td>
                             {isOperationsTable ? (<>
-                            <td><button type="button" className="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target={idTarget}
+                            <td><button type="button" className="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target={idButtonTarget}
                             onClick = {()=>{
-                                document.getElementById("modalAmount").value = item.amount;
-                                document.getElementById("modalConcept").value = item.concept;
-                                document.getElementById("modalDate").value = item.date;
-                                document.getElementById("modalId_operation").value = item.id_operation;
+                                document.getElementById("updateAmount").value = item.amount;
+                                document.getElementById("updateConcept").value = item.concept;
+                                document.getElementById("updateDate").value = item.date;
+                                document.getElementById("updateOperation").value = item.id_operation;
                                 }}>
                                     Modificar
                                 </button>
