@@ -9,7 +9,6 @@ function Table({title, data, isOperationsTable, idButtonTarget}){
             <div className="table-responsive">
                 <table className="table table-hover table-sm ">
                     <thead className="table-secondary">
-                        
                         <tr >
                             {isOperationsTable ? (<><th>Tipo</th><th>Concepto</th></>) : ('') }
                             

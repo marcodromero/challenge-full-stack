@@ -54,6 +54,7 @@ function Home(){
                 data = {balance}
                 isOperationsTable = {false}
                 idTarget = ''
+                
             />
         </div>
     );

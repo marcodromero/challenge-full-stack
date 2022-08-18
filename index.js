@@ -42,6 +42,13 @@ app.get('/operations',(req, res)=>{
 
 app.post('/operations',(req, res)=>{
    const {type, concept, amount, date} = req.body;
+   
+   if(type != "egreso" && type != "ingreso") res.status(400).send('Tipo no valido.');
+   if(concept === '') res.status(400).send('Concepto no valido.');
+   if(amount === '') res.status(400).send('Monto no valido.');
+   if(date === '') res.status(400).send('Fecha no valida.');
+   
+
    const query = `INSERT INTO operations (type, concept, amount, date) VALUES("${type}", "${concept}", ${amount}, "${date}" )`;
   
    connection.query(query,(error, response) =>{

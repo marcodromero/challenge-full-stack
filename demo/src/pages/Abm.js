@@ -71,7 +71,6 @@ function Abm(){
             if(api.status == 204 && api.readyState == 4){
                 getOperations();
              }
-
         }
 
         return false;

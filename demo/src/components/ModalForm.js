@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ModalForm({request, title, idModal, isFormSend}){  
-    
     return(
         <div className="modal fade" id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">

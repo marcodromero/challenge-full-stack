@@ -9,7 +9,6 @@ return(
         </div>
         <div className="card-footer text-muted">
             {isOperations ? (<button className="btn btn-primary" data-bs-toggle="modal" data-bs-target={idButtonTarget}>Abrir formulario</button>) : value[0].formattedDate}
-            
         </div>
     </div>
         
