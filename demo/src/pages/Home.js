@@ -20,7 +20,6 @@ function Home(){
     }
 
     React.useEffect(()=>{
-        getLastBalance();
         getBalance();
     }, []);
     
