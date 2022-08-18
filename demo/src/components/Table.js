@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Table({title, data, isOperationsTable, idButtonTarget}){
- 
+    
 
     return(
         <div>

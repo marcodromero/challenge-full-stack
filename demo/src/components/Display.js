@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Display({value, title, isOperations, idButtonTarget}){
+    
 return(
     <div className="card text-center mb-1">
         <div className="card-body">
