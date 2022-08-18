@@ -50,7 +50,7 @@ app.post('/operations',(req, res)=>{
    if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
    let _amount = `${amount}`;
    if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};
-   const expression = /^(20[2-9][0-9])(\/)(0[1-9]|1[0-2])(\/)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
+   const expression = /^(20[2-9][0-9])(\-)(0[1-9]|1[0-2])(\-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
    if(expression.test(date) === false){msgStatus = 'Fecha no respeta el formato.'; errorStatus = 1};
 
    if(errorStatus == 0){
@@ -77,7 +77,7 @@ app.patch('/operations',(req, res)=>{
     if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
     let _amount = `${amount}`;
     if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};
-    const expression = /^(20[2-9][0-9])(\/)(0[1-9]|1[0-2])(\/)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
+    const expression = /^(20[2-9][0-9])(\-)(0[1-9]|1[0-2])(\-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
     if(expression.test(date) === false){msgStatus = 'Fecha no respeta el formato.'; errorStatus = 1};
 
     if(errorStatus == 0){
@@ -128,22 +128,6 @@ app.get('/balance',(req, res)=>{
                 res.json(results);
             }else{
                 res.send('Not result'); 
-            }
-        }
-    })
-})
-
-app.get('/last-balance',(req, res)=>{
-    const query = 'SELECT amount, DATE_FORMAT(date, "%d/%m/%Y")as formattedDate FROM balance ORDER BY id_balance DESC LIMIT 1';
-    connection.query(query,(error, results) =>{
-        if(error){
-            console.log(error.sqlMessage);
-            res.status(400).send('Fail');
-        }else{
-            if (results.length > 0){
-                res.json(results);
-            }else{
-                res.send('Not result');
             }
         }
     })

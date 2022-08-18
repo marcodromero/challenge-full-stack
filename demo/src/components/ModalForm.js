@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ModalForm({request, title, idModal, isFormSend}){
+function ModalForm({request, title, idModal, isFormSend,idForm}){
     React.useEffect(()=>{
-        document.getElementById('form').onsubmit = ()=>{return false;};
-    }, []);
+        document.getElementById(idForm).onsubmit = ()=>{return false;};
+    },[]);
 
     return(
         <div className="modal fade" id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -14,7 +14,7 @@ function ModalForm({request, title, idModal, isFormSend}){
                          <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <form className='d-flex flex-column' id="form">
+                        <form className='d-flex flex-column' id={idForm}>
                             {isFormSend ? 
                                 <>
                                 <label htmlFor = "concept">Concepto</label>

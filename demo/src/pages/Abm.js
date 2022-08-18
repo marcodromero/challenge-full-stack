@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar.js';
 import Display from '../components/Display.js';
 
 function Abm(){
-    const [operations, setOperations] = React.useState([{}]);
+    const [operations, setOperations] = React.useState([]);
 
     const getOperations = ()=>{
         const api = new XMLHttpRequest();
@@ -109,7 +109,7 @@ function Abm(){
           
                 <Display
                 title = 'Nueva operación'
-                value = {[0]}
+                data = {[0]}
                 idButtonTarget = '#staticBackdropModalFormSend'
                 isOperations = {true}
                 />
@@ -126,6 +126,7 @@ function Abm(){
                     title = 'Registrar operación'
                     idModal = 'staticBackdropModalFormSend'
                     isFormSend = {true}
+                    idForm = 'formSend'
                 />
 
                 <ModalForm
@@ -133,6 +134,7 @@ function Abm(){
                     title = 'Modificar operación'
                     idModal = 'staticBackdropModalFormUpdate'
                     isFormSend = {false}
+                    idForm= 'formUpdate'
                 />
 
                 <ModalValidation
