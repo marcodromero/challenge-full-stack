@@ -5,6 +5,7 @@ import ModalValidation from '../components/ModalValidation.js';
 import Navbar from '../components/Navbar.js';
 import Display from '../components/Display.js';
 
+
 function Abm(){
     const [operations, setOperations] = React.useState([]);
 
@@ -26,6 +27,7 @@ function Abm(){
         const amount = document.getElementById('amount').value;
         const date = document.getElementById('date').value;
         
+        
         const api = new XMLHttpRequest();
         api.open('POST', 'http://localhost:8080/operations', true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
@@ -40,6 +42,9 @@ function Abm(){
 
         api.onreadystatechange = () => {
             if(api.status == 201 && api.readyState == 4){
+                
+              
+               
                 getOperations();
              }
              console.log(api.responseText);

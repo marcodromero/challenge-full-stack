@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
 connection.connect(error =>{
     if(error) throw error;
     console.log('Database server running');
-});
+}); 
 
 app.options('*', cors());
 
@@ -50,7 +50,7 @@ app.post('/operations',(req, res)=>{
    if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
    let _amount = `${amount}`;
    if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};
-   const expressionAmount = /^(\-|)(\d{1,8}).(\d{1,2})$/;
+   const expressionAmount = /^(-|)(\d{1,8})(.|)((\d{1,2})|)$/;
    if(expressionAmount.test(amount) === false){msgStatus = 'Monto no respeta el formato.'; errorStatus = 1};
    const expression = /^(20[2-9][0-9])(\-)(0[1-9]|1[0-2])(\-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
    if(expression.test(date) === false){msgStatus = 'Fecha no respeta el formato.'; errorStatus = 1};
@@ -79,7 +79,7 @@ app.patch('/operations',(req, res)=>{
     if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
     let _amount = `${amount}`;
     if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};
-    const expressionAmount = /^(\-|)(\d{1,8}).(\d{1,2})$/;
+    const expressionAmount = /^(-|)(\d{1,8})(.|)((\d{1,2})|)$/;
     if(expressionAmount.test(amount) === false){msgStatus = 'Monto no respeta el formato.'; errorStatus = 1};
     const expression = /^(20[2-9][0-9])(\-)(0[1-9]|1[0-2])(\-)(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
     if(expression.test(date) === false){msgStatus = 'Fecha no respeta el formato.'; errorStatus = 1};
