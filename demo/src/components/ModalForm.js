@@ -1,8 +1,15 @@
 import React from 'react';
 
-function ModalForm({request, title, idModal, isFormSend,idForm}){
+function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
     React.useEffect(()=>{
+        
         document.getElementById(idForm).onsubmit = ()=>{return false;};
+       
+        document.getElementById(idModal).onclick = ()=>{
+            let alert = document.getElementById(idAlert);
+            alert.className = "alert alert-danger d-none";
+        };
+            
     },[]);
 
     return(
@@ -11,7 +18,7 @@ function ModalForm({request, title, idModal, isFormSend,idForm}){
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">{title}</h5>
-                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id={isFormSend ? "buttonCloseModalSend" : "buttonCloseModalUpdate"}></button>
                     </div>
                     <div className="modal-body">
                         <form className='d-flex flex-column' id={idForm}>
@@ -40,12 +47,13 @@ function ModalForm({request, title, idModal, isFormSend,idForm}){
                                     <input id="updateOperation" type="hidden"/>
                                 </>
                             }
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <input type="submit" className="btn btn-primary" onClick={request} value="Enviar"/>
+                            <div className="modal-footer mt-2">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id= {isFormSend ? "buttonCloseModalSend2" : "buttonCloseModalUpdate2"}>Volver</button>
+                                <input type="submit" className="btn btn-primary" onClick={request}  id={isFormSend ? "buttonSend" : "buttonUpdate" } value="Enviar"/>
                                
                             </div>          
                         </form>
+                        <div className="alert alert-success d-none " role="alert" id={idAlert}></div>
                     </div>
                 </div>
             </div>

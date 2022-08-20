@@ -1,13 +1,24 @@
 import React from 'react';
 
-function ModalValidation({request}){
+function ModalValidation({request, idModal, idAlert}){
+    
+
+    React.useEffect(()=>{
+        const alertHide = ()=>{
+            document.getElementById(idModal).onclick = ()=>{
+                let alert = document.getElementById(idAlert);
+                alert.className = "alert alert-danger d-none";
+        }};
+
+        alertHide();
+    },[]);
     return(
-        <div className="modal fade" id="staticBackdropModalValidation" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal fade" id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">Confirme que desea eliminar la operación</h5>
-                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id="buttonCloseModalDelete"></button>
                     </div>
                     <div className="modal-body">
                         
@@ -33,9 +44,10 @@ function ModalValidation({request}){
                         
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" onClick={request} className="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="buttonCloseModalDelete2">Volver</button>
+                        <button type="submit" onClick={request} className="btn btn-primary" id="buttonDelete" >Confirmar</button>
                     </div>
+                    <div className="alert alert-success d-none " role="alert" id={idAlert}></div>
                 </div>
             </div>
         </div>
