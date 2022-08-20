@@ -8,7 +8,7 @@ function Home(){
 
     const getBalance = ()=>{
         const api = new XMLHttpRequest();
-        api.open('GET', 'http://localhost:8080/balance', true);
+        api.open('GET', 'http://192.168.1.46:8080/balance', true);
         api.send();
 
         api.onreadystatechange = () => {

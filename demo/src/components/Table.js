@@ -3,31 +3,20 @@ import React from 'react'
 function Table({title, data, isOperationsTable, idButtonTarget}){
     return(
         <div>
-            <h3>{title}</h3>
-            <div className="table-responsive">
-                <table className="table table-hover table-sm ">
-                    <thead className="table-secondary">
-                        <tr >
-                            {isOperationsTable ? (<><th>Tipo</th><th>Concepto</th></>) : ('') }
-                            
-                            <th>Monto</th>
-                            <th>Fecha</th>
+            <h3 class = "text-center mt-4">{title}</h3>
 
-                            {isOperationsTable ? (<><th>Opciones</th></>) : ('') }
-                        </tr>
-                    </thead>
-                    <tbody>
-                {
-                    data.map(item => (
-                        <tr key = {'key' +  item.id_operation} className= {item.amount < 0 ? "table-warning" : "table-info"}>
+            {
+                data.map(item => (
+                    <div class="card ">
+                        
+                        <div class="card-body d-lg-flex justify-content-lg-between" >
+                            <h5 id="columnAmount" class= {item.amount < 0 ? "card-title text-danger" : " card-title text-dark"}>${item.amount}</h5>
+                           
+                                <p class="card-text d-block" id="columnConcept">{item.concept}</p>
+                                <p class="card-text fst-italic text-secondary">{item.formattedDate}</p>
+                            
                             {isOperationsTable ? (<>
-                            <td className="text-capitalize">{item.type}</td> 
-                            <td className="text-capitalize">{item.concept}</td>
-                            </>) : ('') }
-                            <td>{item.amount}</td>
-                            <td>{item.formattedDate}</td>
-                            {isOperationsTable ? (<>
-                            <td><button type="button" className="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target={idButtonTarget}
+                            <td><button type="button" className="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target={idButtonTarget}
                             onClick = {()=>{
                                 document.getElementById("updateAmount").value = item.amount;
                                 document.getElementById("updateConcept").value = item.concept;
@@ -39,20 +28,39 @@ function Table({title, data, isOperationsTable, idButtonTarget}){
                                 <button type="button" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropModalValidation"
                             onClick = {()=>{
                                     document.getElementById("modalValidationId_Operation").value = item.id_operation;
-                                
-                                    document.getElementById("deleteType").textContent= `"${item.type}"`;
-                                    document.getElementById("deleteConcept").textContent= `"${item.concept}"`;
-                                    document.getElementById("deleteAmount").textContent= `"${item.amount}"`;
-                                    document.getElementById("deleteDate").textContent= `"${item.date}"`;
+                                    
+                                    let node;
+                                    let nodeText;
+                                    let li;
+                                    
+
+                                    node = document.createElement("p");
+                                    node.innerHTML = `Concepto: ${item.concept}`;
+                                    li = document.getElementById("deleteConcept");
+                                    li.innerHTML = "";
+                                    li.appendChild(node);
+
+                                    node = document.createElement("p");
+                                    node.innerHTML = `Monto: $${item.amount}`;
+                                    li = document.getElementById("deleteAmount");
+                                    li.innerHTML = "";
+                                    li.appendChild(node);
+
+                                    node = document.createElement("p");
+                                    node.innerHTML = `Fecha: ${item.date}`;
+                                    li=document.getElementById("deleteDate");
+                                    li.innerHTML = "";
+                                    li.appendChild(node);
+
                                 }}>
                                     Eliminar
                                 </button>
                             </td></>) : ('')}
-                        </tr>))
-                }
-                    </tbody>
-                </table>
-            </div>
+                        </div>
+                        </div>
+                ))
+            }
+
         </div>
 
     );

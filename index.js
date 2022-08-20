@@ -47,6 +47,7 @@ app.post('/operations',(req, res)=>{
    
    if(type != "egreso" && type != "ingreso"){msgStatus = 'Tipo no valido'; errorStatus = 1};
    if(concept === '') {msgStatus = 'Concepto no puede estar vacio.'; errorStatus = 1};
+   if(concept.length > 50) {msgStatus = 'Concepto debe tener no más de 50 caracteres.'; errorStatus = 1};
    if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
    let _amount = `${amount}`;
    if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};
@@ -76,6 +77,7 @@ app.patch('/operations',(req, res)=>{
     let msgStatus;
    
     if(concept === '') {msgStatus = 'Concepto no puede estar vacio.'; errorStatus = 1};
+    if(concept.length > 50) {msgStatus = 'Concepto debe tener no más de 50 caracteres.'; errorStatus = 1};
     if(amount === '') {msgStatus = 'Monto no puede estar vacio.'; errorStatus = 1};
     let _amount = `${amount}`;
     if(isNaN(_amount)) {msgStatus = 'Monto debe ser numerico.'; errorStatus = 1};

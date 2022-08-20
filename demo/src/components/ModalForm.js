@@ -13,8 +13,8 @@ function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
     },[]);
 
     return(
-        <div className="modal fade" id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog">
+        <div className="modal fade " id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">{title}</h5>
@@ -25,9 +25,9 @@ function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
                             {isFormSend ? 
                                 <>
                                 <label htmlFor = "concept">Concepto</label>
-                                <input type ="text" id="concept" required/>
+                                <input type ="text" id="concept" maxLength="50" required/>
                                 <label htmlFor ="amount">Monto</label>
-                                <input type ="number" step="0.01" id="amount" required/>
+                                <input type ="number" step="0.01" id="amount" maxLength="10" required/>
                                 <label htmlFor ="date">Fecha</label>
                                 <input type ="date" id="date" required/>                      
                                 <label htmlFor ="type">Tipo</label>
@@ -39,9 +39,9 @@ function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
                                 </> :
                                 <>
                                     <label htmlFor = "updateConcept">Concepto</label>
-                                    <input type ="text" id="updateConcept" required/>
+                                    <input type ="text" id="updateConcept" maxLength="50" required/>
                                     <label htmlFor ="updateAmount">Monto</label>
-                                    <input type ="number" step="0.01" id="updateAmount" required/>
+                                    <input type ="number" step="0.01" id="updateAmount" min="-99999999.99" max="99999999.99" required/>
                                     <label htmlFor ="updateDate">Fecha</label>
                                     <input type ="date" id="updateDate" required/>                       
                                     <input id="updateOperation" type="hidden"/>

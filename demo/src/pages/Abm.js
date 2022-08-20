@@ -11,7 +11,7 @@ function Abm(){
 
     const getOperations = ()=>{
         const api = new XMLHttpRequest();
-        api.open('GET', 'http://localhost:8080/operations', true);
+        api.open('GET', 'http://192.168.1.46:8080/operations', true);
         api.send();
 
         api.onreadystatechange = () => {
@@ -30,7 +30,7 @@ function Abm(){
         
         
         const api = new XMLHttpRequest();
-        api.open('POST', 'http://localhost:8080/operations', true);
+        api.open('POST', 'http://192.168.1.46:8080/operations', true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
@@ -71,7 +71,7 @@ function Abm(){
         const alert = document.getElementById("alertUpdate");
         
         const api = new XMLHttpRequest();
-        api.open('PATCH', 'http://localhost:8080/operations', true);
+        api.open('PATCH', 'http://192.168.1.46:8080/operations', true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
@@ -108,7 +108,7 @@ function Abm(){
         const alert = document.getElementById("alertDelete");
         
         const api = new XMLHttpRequest();
-        api.open('DELETE', 'http://localhost:8080/operations', true);
+        api.open('DELETE', 'http://192.168.1.46:8080/operations', true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
