@@ -3,8 +3,10 @@ import React from 'react';
 function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
     React.useEffect(()=>{
         
+        //Prevent the form from submitting.
         document.getElementById(idForm).onsubmit = ()=>{return false;};
        
+        //Clicking anywhere on the modal will hide the notification if it was visible.
         document.getElementById(idModal).onclick = ()=>{
             let alert = document.getElementById(idAlert);
             alert.className = "alert alert-danger d-none";
@@ -13,8 +15,8 @@ function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
     },[]);
 
     return(
-        <div className="modal fade " id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered">
+        <div className="modal fade" id={idModal} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered ">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="staticBackdropLabel">{title}</h5>
@@ -50,7 +52,6 @@ function ModalForm({request, title, idModal, isFormSend,idForm, idAlert}){
                             <div className="modal-footer mt-2">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id= {isFormSend ? "buttonCloseModalSend2" : "buttonCloseModalUpdate2"}>Volver</button>
                                 <input type="submit" className="btn btn-primary" onClick={request}  id={isFormSend ? "buttonSend" : "buttonUpdate" } value="Enviar"/>
-                               
                             </div>          
                         </form>
                         <div className="alert alert-success d-none " role="alert" id={idAlert}></div>

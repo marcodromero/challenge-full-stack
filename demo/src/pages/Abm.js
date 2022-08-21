@@ -1,17 +1,19 @@
 import React from 'react';
-import Table from '../components/Table.js';
+import Card from '../components/Card.js';
 import ModalForm from '../components/ModalForm.js';
-import ModalValidation from '../components/ModalValidation.js';
+import ModalDelete from '../components/ModalDelete.js';
 import Navbar from '../components/Navbar.js';
-import Display from '../components/Display.js';
+import SmallCard from '../components/SmallCard.js';
 
 
 function Abm(){
     const [operations, setOperations] = React.useState([]);
+    const serverIp = "192.168.1.46:8080"
 
+    //operations request
     const getOperations = ()=>{
         const api = new XMLHttpRequest();
-        api.open('GET', 'http://192.168.1.46:8080/operations', true);
+        api.open('GET', `http://${serverIp}/operations`, true);
         api.send();
 
         api.onreadystatechange = () => {
@@ -21,6 +23,7 @@ function Abm(){
         }
     }
 
+    //request to add operation
     const sendOperation = () => {
         let type = document.getElementById('type').value;
         let concept = document.getElementById('concept').value;
@@ -28,9 +31,8 @@ function Abm(){
         let date = document.getElementById('date').value;
         const alert = document.getElementById("alertSend");
         
-        
         const api = new XMLHttpRequest();
-        api.open('POST', 'http://192.168.1.46:8080/operations', true);
+        api.open('POST', `http://${serverIp}/operations`, true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
@@ -40,7 +42,9 @@ function Abm(){
                 "date" : `${date}`
             }
         ));
-
+        
+        //When the request is completed: the fields of the form will be emptied.
+        //When the request fails: the message with the error will be displayed.
         api.onreadystatechange = () => {
             if(api.status == 201 && api.readyState == 4){
                 getOperations();
@@ -55,14 +59,11 @@ function Abm(){
              if(api.status == 400 && api.readyState == 4){
                 alert.innerText = api.responseText;               
                 alert.className = "alert alert-danger d-block";
-             }
-             
+             }   
         }
-        
-
-      
     }
 
+    //request to update the data of an operation
     const updateOperation = () => {
         const concept = document.getElementById('updateConcept').value;
         const amount = document.getElementById('updateAmount').value;
@@ -71,7 +72,7 @@ function Abm(){
         const alert = document.getElementById("alertUpdate");
         
         const api = new XMLHttpRequest();
-        api.open('PATCH', 'http://192.168.1.46:8080/operations', true);
+        api.open('PATCH', `http://${serverIp}/operations`, true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
@@ -81,7 +82,9 @@ function Abm(){
                 "date" : `${date}`
             }
         ));
-
+        
+        //When the request is completed, the confirm button will be hidden until the modal is closed.
+        //When the request fails: the message with the error will be displayed.
         api.onreadystatechange = () => {
             if(api.status == 204 && api.readyState == 4){
                 getOperations();
@@ -103,19 +106,22 @@ function Abm(){
         return false;
       }
 
+      //request to delete operation
       const deleteOperation = () => {
         const id_operation = document.getElementById('modalValidationId_Operation').value;
         const alert = document.getElementById("alertDelete");
         
         const api = new XMLHttpRequest();
-        api.open('DELETE', 'http://192.168.1.46:8080/operations', true);
+        api.open('DELETE', `http://${serverIp}/operations`, true);
         api.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
         api.send(JSON.stringify(
             {
                 "id_operation": `${id_operation}`
             }
         ));
-
+        
+        //When the request is completed, the confirm button will be hidden until the modal is closed.
+        //When the request fails: the message with the error will be displayed.
         api.onreadystatechange = () => {
             if(api.status == 204 && api.readyState == 4){
                 getOperations();
@@ -132,9 +138,7 @@ function Abm(){
                 alert.innerText = api.responseText;               
                 alert.className = "alert alert-danger d-block";
              }
-
         }
-
         return false;
       }
 
@@ -144,53 +148,50 @@ function Abm(){
     }, []);
 
     return(
-        <div className="Abm">
-                <Navbar />
-          
-                <Display
-                title = 'Nueva operación'
-                data = {[0]}
-                idButtonTarget = '#staticBackdropModalFormSend'
-                isOperations = {true}
-                />
-
-                <Table
-                    title = 'Operaciones registradas'
-                    data = {operations}
-                    isOperationsTable = {true}
-                    idButtonTarget = '#staticBackdropModalFormUpdate'
-                />
-
-                <ModalForm
-                    request = {sendOperation}
-                    title = 'Registrar operación'
-                    idModal = 'staticBackdropModalFormSend'
-                    isFormSend = {true}
-                    idForm = 'formSend'
-                    idAlert = 'alertSend'
-                    
-                />
-
-                <ModalForm
-                    request = {updateOperation}
-                    title = 'Modificar operación'
-                    idModal = 'staticBackdropModalFormUpdate'
-                    isFormSend = {false}
-                    idForm= 'formUpdate'
-                    idAlert = 'alertUpdate'
-                    
-                />
-
-                <ModalValidation
-                    request = {deleteOperation}
-                    idModal = 'staticBackdropModalValidation'
-                    idAlert = 'alertDelete'
-                    
-                />
-
+        <>
+        <Navbar />
+        <div className="container-fluid">
                 
+            <SmallCard
+            title = 'Nueva operación'
+            data = {[0]}
+            idButtonTarget = '#staticBackdropModalFormSend'
+            isOperations = {true}
+            />
+
+            <Card
+                title = 'Operaciones registradas'
+                data = {operations}
+                isOperationsTable = {true}
+                idButtonTarget = '#staticBackdropModalFormUpdate'
+            />
+
+            <ModalForm
+                request = {sendOperation}
+                title = 'Registrar operación'
+                idModal = 'staticBackdropModalFormSend'
+                isFormSend = {true}
+                idForm = 'formSend'
+                idAlert = 'alertSend'           
+            />
+
+            <ModalForm
+                request = {updateOperation}
+                title = 'Modificar operación'
+                idModal = 'staticBackdropModalFormUpdate'
+                isFormSend = {false}
+                idForm= 'formUpdate'
+                idAlert = 'alertUpdate' 
+            />
+
+            <ModalDelete
+                request = {deleteOperation}
+                idModal = 'staticBackdropModalValidation'
+                idAlert = 'alertDelete'    
+            />
             
         </div>
+        </>
     );
 }
 

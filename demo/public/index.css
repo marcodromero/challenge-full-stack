@@ -1,7 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 #columnConcept{
-    width: 400px;
+    width: 320px;
 }
 
 #columnAmount{
     width:150px;
 }
+
+@media(min-width:900px){
+    #columnConcept{
+        width: 400px;
+    }
+}
+
+
