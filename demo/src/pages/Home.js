@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar.js';
 
 function Home(){
     const [balance, setBalance] = React.useState([{}]);
-    const serverIp = "192.168.1.46:8080";
+    const serverIp = "localhost:8080";
     
     //Request for all existing operations on the database.
     const getBalance = ()=>{

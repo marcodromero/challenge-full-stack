@@ -5,10 +5,9 @@ import ModalDelete from '../components/ModalDelete.js';
 import Navbar from '../components/Navbar.js';
 import SmallCard from '../components/SmallCard.js';
 
-
 function Abm(){
     const [operations, setOperations] = React.useState([]);
-    const serverIp = "192.168.1.46:8080"
+    const serverIp = "localhost:8080"
 
     //operations request
     const getOperations = ()=>{
